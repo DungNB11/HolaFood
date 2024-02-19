@@ -75,9 +75,9 @@
 
                             <div class="col-md-6">
 
-
+                                
                                 <form action="add_product" method="POST" >
-
+                                    <h5 style="color: red; margin: auto; padding-bottom: 2rem">${requestScope.error}</h5>
                                     <div class="form-group">
                                         <input type="text" name="name"  class="form-control" placeholder="Product name" required="" />
                                     </div>

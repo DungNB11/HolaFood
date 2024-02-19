@@ -64,8 +64,6 @@ public class AddProductServlet extends HttpServlet {
             throws ServletException, IOException {
         List<Category> list1 = DAO.INSTANCE.getAllCategories();
         request.setAttribute("catego", list1);
-        String asd = "asd";
-        request.setAttribute("er", asd);
         request.getRequestDispatcher("add_product.jsp").forward(request, response);
     }
 
@@ -85,15 +83,34 @@ public class AddProductServlet extends HttpServlet {
         String describe = request.getParameter("describe");
         String image = request.getParameter("image");
         String cid_raw = request.getParameter("cid");
-        int price = Integer.parseInt(price_raw);
-        int cid = Integer.parseInt(cid_raw);
+        int price = 0;
+        int cid = 0;
+        try {
+            price = Integer.parseInt(price_raw);
+            cid = Integer.parseInt(cid_raw);
+        } catch (Exception e) {
+            price = 10000000;
+        }
+        
 
         try {
-
-            Product c1 = new Product(name, price, describe, image, cid);
-            ProductDAO.INSTANCE.insert(c1);
-            response.sendRedirect("manager?cid=" + cid);
-
+            if (name.length() > 25) {
+                request.setAttribute("error", "Product names are limited to 25 characters.");
+                doGet(request, response);
+            } else if (price < 0 || price > 10000000) {
+                request.setAttribute("error", "Invalid price.");
+                doGet(request, response);
+            } else if (describe.length() > 1000) {
+                request.setAttribute("error", "Product describe are limited to 1000 characters.");
+                doGet(request, response);
+            } else if (!image.endsWith(".jpg")) {
+                request.setAttribute("error", "Product photos must have the extension \".jpg\"");
+                doGet(request, response);
+            } else {
+                Product c1 = new Product(name, price, describe, image, cid);
+                ProductDAO.INSTANCE.insert(c1);
+                response.sendRedirect("manager?cid=" + cid);
+            }
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
