@@ -19,8 +19,10 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />    
         <link href="css/templatemo-style.css" rel="stylesheet" />
     </head>
-    
+
     <body> 
+
+
 
         <div class="container">
             <!-- Top box -->
@@ -52,12 +54,17 @@
             </div>
 
             <main>
-               
+
                 <div class="col-md-4" style="margin-left: 50px">
                     <a href="manager" target="_parent" class="tm-register">
                         <i> <-Back </i>
                     </a>
                 </div>
+                <c:if test="${requestScope.msgCategory != null}">
+                    <h3 style="color: red; padding-left: 2%">${requestScope.msgCategory}</h3>
+                    <% session.removeAttribute("msgCategory"); 
+                    %>
+                </c:if>
                 <div class="tm-paging-links">
                     <nav>
                         <ul>
@@ -65,15 +72,15 @@
                             <div class="col-md-6">
                                 <h3 style="color: red">${requestScope.ms}</h3>
                                 <form action="add_category" >
-                                    
+
                                     <div class="form-group">
                                         <input type="text" name="name"  class="form-control" placeholder="Category name" required="" />
                                     </div>
-                                    
+
                                     <div class="form-group tm-d-flex">
                                         <input type="submit" class="tm-btn tm-btn-success tm-btn" value="Add">
                                     </div>
-                            </form>
+                                </form>
                             </div> 
                         </ul>
                     </nav>
@@ -127,18 +134,18 @@
         <script src="js/jquery.min.js"></script>
         <script src="js/parallax.min.js"></script>
         <script>
-            $(document).ready(function () {
-                // Handle click on paging links
-                $('.tm-paging-link').click(function (e) {
-                    e.preventDefault();
+                        $(document).ready(function () {
+                            // Handle click on paging links
+                            $('.tm-paging-link').click(function (e) {
+                                e.preventDefault();
 
-                    var page = $(this).text().toLowerCase();
-                    $('.tm-gallery-page').addClass('hidden');
-                    $('#tm-gallery-page-' + page).removeClass('hidden');
-                    $('.tm-paging-link').removeClass('active');
-                    $(this).addClass("active");
-                });
-            });
+                                var page = $(this).text().toLowerCase();
+                                $('.tm-gallery-page').addClass('hidden');
+                                $('#tm-gallery-page-' + page).removeClass('hidden');
+                                $('.tm-paging-link').removeClass('active');
+                                $(this).addClass("active");
+                            });
+                        });
         </script>
     </body>
 </html>
