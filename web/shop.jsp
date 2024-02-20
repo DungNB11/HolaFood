@@ -131,13 +131,13 @@
                                                     <span class="tm-gallery-price product-price">${n.price} đ</span>
                                                 </div>
                                                 <div class="quantity">
-                                                    <input type="number" name="num" value="" id="qty${n.id}" class="form-control" placeholder="Quantity" required="" min="0" />
+                                                    <input type="number" name="num" value="" id="qty${n.id}" class="form-control" placeholder="Quantity" required="" min="1" />
                                                     <input type="hidden" name="id" value="${n.id}"/>
                                                 </div>
                                             </div>
                                             <div class="form-group tm-d-flex">
                                                 <div class="button-group">
-                                                    <button type="button" class="btn btn-secondary" onclick="addToCart(${n.id})">
+                                                    <button type="button" class="btn btn-secondary"  onclick="addToCart(${n.id})">
                                                         Add to cart <i class="fas fa-shopping-cart"></i> 
                                                     </button>
                                                     <input class="btn btn-primary" type="submit" value="Buy now!">

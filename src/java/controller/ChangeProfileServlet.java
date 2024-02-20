@@ -4,6 +4,7 @@
  */
 package controller;
 
+import common.InOutUtils;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.User;
+import java.util.logging.*;
 
 /**
  *
@@ -55,6 +57,8 @@ public class ChangeProfileServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private static final Logger logger = Logger.getLogger(ChangeProfileServlet.class.getName());
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -72,19 +76,41 @@ public class ChangeProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        InOutUtils in = new InOutUtils();
+
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
         String fullname = request.getParameter("fullname");
         String email = request.getParameter("email");
         String phonenum = request.getParameter("phonenum");
         String address = request.getParameter("address");
-
+        if(fullname.trim().length()==0||email.trim().length()==0
+                || phonenum.trim().length()==0 || address.trim().length()==0){
+            logger.log(Level.WARNING, "One of the field has null value");
+        }
         User u = UserDAO.INSTANCE.check(user, pass);
         if (u != null) {
-            User ac = new User(user, pass, fullname, email, phonenum, address);
-            UserDAO.INSTANCE.changePro(ac);
-            HttpSession session = request.getSession();
-            session.setAttribute("account", ac);
+            if (!in.isValidFullName(fullname)) {
+                logger.log(Level.WARNING, "Full Name does not valid");
+            }
+            if (!in.isValidPhoneNumber(phonenum)) {
+                logger.log(Level.WARNING, "Phone number does not valid");
+            }
+            if (!in.isValidEmail(email)) {
+                logger.log(Level.WARNING, "Email does not valid");
+            }
+            if (!in.isValidAddress(address)) {
+                logger.log(Level.WARNING, "Address does not valid");
+            } else {
+                User ac = new User(user, pass, fullname, email, phonenum, address);
+                UserDAO.INSTANCE.changePro(ac);
+                
+                HttpSession session = request.getSession();
+                session.setAttribute("account", ac);
+                logger.log(Level.INFO, "Update Successfully");
+                
+            }
+
         }
         response.sendRedirect("profile.jsp");
     }
