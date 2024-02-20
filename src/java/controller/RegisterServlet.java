@@ -68,7 +68,6 @@ public class RegisterServlet extends HttpServlet {
         // username ton tai
         String ms = "";
         boolean hasError = false;
-        System.out.println(common.InOutUtils.isValidEmail("user@example.com"));
 
         if (UserDAO.INSTANCE.existedUs(user)) {
             ms += "Username existed!\n";

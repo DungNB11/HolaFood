@@ -59,7 +59,11 @@
                         <i> <-Back </i>
                     </a>
                 </div>
-
+                <c:if test="${requestScope.msgCategory != null}">
+                    <h3 style="color: red; padding-left: 2%">${requestScope.msgCategory}</h3>
+                    <% session.removeAttribute("msgCategory"); 
+                    %>
+                </c:if>
                 <div class="tm-paging-links">
                     <nav>
                         <ul>

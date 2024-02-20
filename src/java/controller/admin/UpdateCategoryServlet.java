@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.Category;
 
 /**
@@ -88,13 +89,33 @@ public class UpdateCategoryServlet extends HttpServlet {
 
         int id;
         try {
+            String msgCategory = "";
             id = Integer.parseInt(id_raw);
-            Category c = new Category(id, name);
-            CategoryDAO.INSTANCE.update(c);
+            if (CategoryDAO.INSTANCE.isExist(name)) {
+                msgCategory = "Category is exists!";
+                Category c = CategoryDAO.INSTANCE.getCategoryById(id);
+                request.setAttribute("cate", c);
+                request.setAttribute("msgCategory", msgCategory);
+                request.getRequestDispatcher("update_category.jsp").forward(request, response);
+            } else {
+                if (!common.InOutUtils.isValidCategory(name)) {
+                    Category c = CategoryDAO.INSTANCE.getCategoryById(id);
+                    request.setAttribute("cate", c);
+                    msgCategory = "Categories contains A-Z, a-z, space, _ and has length 2 to 20 characters.";
+                    request.setAttribute("msgCategory", msgCategory);
+                    request.getRequestDispatcher("update_category.jsp").forward(request, response);
+                } else {
+                    String _msgCategory = "Category was updated successfully.";
+                    Category c = new Category(id, name);
+                    CategoryDAO.INSTANCE.update(c);
+                    HttpSession ses = request.getSession();
+                    ses.setAttribute("msgCategory", _msgCategory);
+                    response.sendRedirect("manager");
+                }
+            }
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
-        response.sendRedirect("manager");
     }
 
     /**

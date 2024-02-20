@@ -43,6 +43,16 @@ public class CategoryDAO {
         }
     }
 
+    public boolean isExist(String name) {
+        List<Category> categoriesList = CategoryDAO.INSTANCE.getAll();
+        for (Category category : categoriesList) {
+            if (category.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<Category> getAll() {
         List<Category> ls = new ArrayList<>();
         String sql = "SELECT [id]\n"

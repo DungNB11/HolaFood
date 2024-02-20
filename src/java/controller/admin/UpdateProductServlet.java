@@ -87,15 +87,35 @@ public class UpdateProductServlet extends HttpServlet {
         String price_raw = request.getParameter("price");
         String describe = request.getParameter("describe");
         String image = request.getParameter("image");
+        int price = 0;
+        try {
+            price = Integer.parseInt(price_raw);
+        } catch (Exception e) {
+            price = 10000000;
+        }
+        
 
         try {
-            int price = Integer.parseInt(price_raw);
-            Product c = new Product(id_raw, name, price, describe, image);
-            ProductDAO.INSTANCE.update(c);
+            if (name.length() > 25) {
+                request.setAttribute("error", "Product names are limited to 25 characters.");
+                doGet(request, response);
+            } else if (price < 0 || price > 10000000) {
+                request.setAttribute("error", "Invalid price.");
+                doGet(request, response);
+            } else if (describe.length() > 1000) {
+                request.setAttribute("error", "Product describe are limited to 1000 characters.");
+                doGet(request, response);
+            } else if (!image.endsWith(".jpg")) {
+                request.setAttribute("error", "Product photos must have the extension \".jpg\"");
+                doGet(request, response);
+            } else {
+                Product c = new Product(id_raw, name, price, describe, image);
+                ProductDAO.INSTANCE.update(c);
+                response.sendRedirect("manager");
+            }
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
-        response.sendRedirect("manager");
     }
 
     /**

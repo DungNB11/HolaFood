@@ -66,6 +66,7 @@
                             <c:set var="p" value="${requestScope.prod}"/>
                             <div class="col-md-6">
                                 <form action="update_product" method="post">
+                                    <h5 style="color: red; margin: auto; padding-bottom: 2rem">${requestScope.error}</h5>
                                     <div class="form-group">
                                         <input type="text" readonly name="id" value="${p.id}" class="form-control" required="" />
                                     </div>

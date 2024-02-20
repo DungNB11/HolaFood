@@ -14,7 +14,7 @@
         <link href="css/templatemo-style.css" rel="stylesheet" />
         <link href="css/all.min.css" rel="stylesheet" />
     </head>
-    
+
     <script type="text/javascript">
         function doDeleteCate(id) {
             if (confirm("Are you sure to delete this category!?")) {
@@ -30,6 +30,12 @@
         }
     </script>
     <body> 
+        <c:if test="${sessionScope.msgCategory != null}">
+            <script>
+                alert('${sessionScope.msgCategory}');
+            </script>
+            <% session.removeAttribute("msgCategory"); %>
+        </c:if>
 
         <div class="container">
             <!-- Top box -->
@@ -61,7 +67,7 @@
             </div>
 
             <main>
-                
+
                 <div class="col-md-6" style="">
                     <a href="add_product" class="tm-register">
                         <i>Add Product</i>
@@ -106,7 +112,7 @@
                                     </figcaption>
                                 </figure>
                             </article>
-                                        <img src="img/delete.jpg" height="17px" width="17px"  href="#" onclick="doDeleteProd('${p.id}')"  alt="alt"/>
+                            <img src="img/delete.jpg" height="17px" width="17px"  href="#" onclick="doDeleteProd('${p.id}')"  alt="alt"/>
                             <a href="update_product?id=${p.id}"><img src="img/update.png" height="17px" width="17px"   alt="alt"/></a>
                             </c:forEach>                           
                     </div> 

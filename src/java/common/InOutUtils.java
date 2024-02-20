@@ -42,4 +42,12 @@ public class InOutUtils {
         return true;
     }
 
+    
+    public static boolean isValidCategory(String category) {
+        if (category == null || category.length() < 2 || category.length() > 20) {
+            return false;
+        }
+        String pattern = "^[A-Za-z _]+$";
+        return category.matches(pattern);
+    }
 }
