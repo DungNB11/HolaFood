@@ -90,7 +90,7 @@
                                                         <span class="tm-gallery-price product-price">${f.price} đ</span>
                                                     </div>
                                                     <div class="quantity">
-                                                        <input type="number" name="num" id="qty${f.id}"  value="" class="form-control" placeholder="Quantity" required="" min="0" />
+                                                        <input type="number" name="num" id="qty${f.id}"  value="" class="form-control" placeholder="Quantity" required="" min="1" />
                                                         <input type="hidden" name="id" value="${f.id}"/>
                                                     </div>
                                                 </div>
@@ -159,7 +159,7 @@
                                                         <span class="tm-gallery-price product-price">${m.price} đ</span>
                                                     </div>
                                                     <div class="quantity">
-                                                        <input type="number" name="num" value="" id="qty${m.id}" class="form-control" placeholder="Quantity" required="" min="0" />
+                                                        <input type="number" name="num" value="" id="qty${m.id}" class="form-control" placeholder="Quantity" required="" min="1" />
                                                         <input type="hidden" name="id" value="${m.id}"/>
                                                     </div>
                                                 </div>
@@ -391,16 +391,20 @@
                                                                 var cart = getCookie("cart");
                                                                 qty = qty && parseInt(qty) || 0;
                                                                 if (qty === 0) {
-                                                                    return;
+                                                                    alert("Select quantity before Add to Cart");
+                                                                } else if(qty>=1&&qty<=10){
+                                                                    var newProduct = id + ":" + qty;
+                                                                    if (cart === "") {
+                                                                        cart = newProduct;
+                                                                    } else {
+                                                                        cart = cart + "-" + newProduct;
+                                                                    }
+                                                                    document.cookie = "cart=" + cart;
+                                                                    window.window.alert("Add to cart successfully");
                                                                 }
-                                                                var newProduct = id + ":" + qty;
-                                                                if (cart === "") {
-                                                                    cart = newProduct;
-                                                                } else {
-                                                                    cart = cart + "-" + newProduct;
+                                                                else if(qty>=11){
+                                                                    alert("Quantity must be smaller than 11");
                                                                 }
-                                                                document.cookie = "cart=" + cart;
-                                                                window.window.alert("Add to cart successfully");
                                                             }
         </script>
 

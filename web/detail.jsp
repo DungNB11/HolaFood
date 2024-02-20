@@ -89,7 +89,7 @@
 
                                     <div class="form-group tm-d-flex">
                                         <div class="form-group">
-                                            <input type="number" name="num" value="" class="form-control" placeholder="Quantity" required="" />
+                                            <input type="number" name="num" value="" class="form-control" placeholder="Quantity" min="1" required="" />
                                             <input type="hidden" name="id" value="${p.id}"/>
                                         </div>
                                         <input type="submit" class="tm-btn tm-btn-success tm-btn" onclick="buy('${p.id}')"  value="Buy now!">
