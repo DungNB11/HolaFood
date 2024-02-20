@@ -134,7 +134,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="text-muted font-weight-normal m-0">Phone Number</label>
-                                        <input type="text" name="address" class="form-control" value="${sessionScope.account.phonenum}"   required="" />
+                                        <input type="number" name="address" class="form-control" value="${sessionScope.account.phonenum}"   required="" />
                                     </div>  
                                 </div>
 
@@ -152,7 +152,7 @@
                                         <button class="accordion" >Choose place to eat</button>
                                         <div class="panel"> 
                                             <div class="form-group">
-                                                <input type="radio" name="placeToEat" value="1" />
+                                                <input type="radio" name="placeToEat" value="1" checked/>
                                                 <label class="text-muted font-weight-normal m-0">Eat in site</label>
                                             </div> 
                                             <div class="form-group">

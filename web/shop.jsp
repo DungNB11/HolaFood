@@ -496,23 +496,27 @@
                                                             }
                                                             return "";
                                                         }
-                                                        function addToCart(id) {
+                                                       function addToCart(id) {
 //                                                            var id = document.querySelector("input[name='id']").value;
-                                                            var qty = document.getElementById("qty"+id).value;
-                                                            var cart = getCookie("cart");
-                                                            qty = qty && parseInt(qty) || 0;
-                                                            if(qty === 0){
-                                                                return;
+                                                                var qty = document.getElementById("qty" + id).value;
+                                                                var cart = getCookie("cart");
+                                                                qty = qty && parseInt(qty) || 0;
+                                                                if (qty === 0) {
+                                                                    alert("Select quantity before Add to Cart");
+                                                                } else if(qty>=1&&qty<=10){
+                                                                    var newProduct = id + ":" + qty;
+                                                                    if (cart === "") {
+                                                                        cart = newProduct;
+                                                                    } else {
+                                                                        cart = cart + "-" + newProduct;
+                                                                    }
+                                                                    document.cookie = "cart=" + cart;
+                                                                    window.window.alert("Add to cart successfully");
+                                                                }
+                                                                else if(qty>=11){
+                                                                    alert("Quantity must be smaller than 11");
+                                                                }
                                                             }
-                                                            var newProduct = id + ":" + qty;
-                                                            if (cart === "") {
-                                                                cart = newProduct;
-                                                            } else {
-                                                                cart = cart + "-" + newProduct;
-                                                            }
-                                                            document.cookie = "cart=" + cart;
-                                                            window.window.alert("Add to cart successfully");
-                                                        }
 
 
         </script>                        
