@@ -90,7 +90,7 @@
                                                         <span class="tm-gallery-price product-price">${f.price} đ</span>
                                                     </div>
                                                     <div class="quantity">
-                                                        <input type="number" name="num" id="qty${f.id}"  value="" class="form-control" placeholder="Quantity" required="" min="1" />
+                                                        <input type="number" name="num" id="qty${f.id}"  value="" class="form-control" placeholder="Quantity" required="" min="0" />
                                                         <input type="hidden" name="id" value="${f.id}"/>
                                                     </div>
                                                 </div>
@@ -159,7 +159,7 @@
                                                         <span class="tm-gallery-price product-price">${m.price} đ</span>
                                                     </div>
                                                     <div class="quantity">
-                                                        <input type="number" name="num" value="" id="qty${m.id}" class="form-control" placeholder="Quantity" required="" min="1" />
+                                                        <input type="number" name="num" value="" id="qty${m.id}" class="form-control" placeholder="Quantity" required="" min="0" />
                                                         <input type="hidden" name="id" value="${m.id}"/>
                                                     </div>
                                                 </div>
@@ -390,9 +390,12 @@
                                                                 var qty = document.getElementById("qty" + id).value;
                                                                 var cart = getCookie("cart");
                                                                 qty = qty && parseInt(qty) || 0;
-                                                                if (qty === 0) {
+                                                                if (qty === null) {
                                                                     alert("Select quantity before Add to Cart");
-                                                                } else if(qty>=1&&qty<=10){
+                                                                } else if(qty===0){
+                                                                    alert("Quantity must be greated than 0");
+                                                                }
+                                                                else if(qty>=1&&qty<=10){
                                                                     var newProduct = id + ":" + qty;
                                                                     if (cart === "") {
                                                                         cart = newProduct;

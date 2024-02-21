@@ -80,7 +80,12 @@ public class ChangePassServlet extends HttpServlet {
         User u = UserDAO.INSTANCE.check(username, oPass);
 
         if (u != null) {
-            if (pass.length() >= 8) {
+
+            if (pass.contains(" ")) {
+                request.setAttribute("mess", "Password must not contain space characters");
+            } else if (pass.length() < 8) {
+                request.setAttribute("mess", "Password too short!");
+            } else {
                 if (pass.equals(re_pass)) {
                     u.setPassword(pass);
                     UserDAO.INSTANCE.change(u);
@@ -90,8 +95,6 @@ public class ChangePassServlet extends HttpServlet {
                 } else {
                     request.setAttribute("mess", "Re-entered password is incorrect");
                 }
-            } else {
-                request.setAttribute("mess", "Password too short!");
             }
         } else {
             request.setAttribute("mess", "Incorrect password");
