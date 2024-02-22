@@ -73,11 +73,11 @@
                                 <h3 style="color: red">${requestScope.error}</h3>
 
                                 <div class="form-group">
-                                    <input type="text" name="name" pattern="[a-zA-Z0-9]{6,20}" title="Username must be 6 to 20 characters long and contain only letters and numbers." class="form-control" placeholder="Username" required="" />
+                                    <input type="text" name="name" title="Username must be 6 to 20 characters long and contain only letters and numbers." class="form-control" placeholder="Username" required="" />
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="password" name="pass" pattern="^\S{8,}$" title="Password must be at least 8 characters long and cannot contain spaces." class="form-control" placeholder="Password" required="" />
+                                    <input type="password" name="pass" title="Password must be at least 8 characters long and cannot contain spaces." class="form-control" placeholder="Password" required="" />
                                 </div>
 
                                 <input type="checkbox" name="remember me" ${(cookie.crem.value!=null?'checked':'')} value="on"/> Remember me <br/>

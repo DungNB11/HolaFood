@@ -93,20 +93,21 @@ public class UpdateProductServlet extends HttpServlet {
         } catch (Exception e) {
             price = 10000000;
         }
-        
 
         try {
-            if (name.length() > 25) {
-                request.setAttribute("error", "Product names are limited to 25 characters.");
-                doGet(request, response);
-            } else if (price < 0 || price > 10000000) {
-                request.setAttribute("error", "Invalid price.");
-                doGet(request, response);
-            } else if (describe.length() > 1000) {
-                request.setAttribute("error", "Product describe are limited to 1000 characters.");
-                doGet(request, response);
-            } else if (!image.endsWith(".jpg")) {
-                request.setAttribute("error", "Product photos must have the extension \".jpg\"");
+            if (name.length() > 25 || price < 0 || price > 10000000 || describe.length() > 1000 || !image.endsWith(".jpg")) {
+                if (name.length() > 25) {
+                    request.setAttribute("errorName", "Product names are limited to 25 characters.");
+                }
+                if (price < 0 || price > 10000000) {
+                    request.setAttribute("errorPrice", "Invalid price.");
+                }
+                if (describe.length() > 1000) {
+                    request.setAttribute("errorDescribe", "Product describe are limited to 1000 characters.");
+                }
+                if (!image.endsWith(".jpg")) {
+                    request.setAttribute("errorImage", "Product image must have the extension \".jpg\"");
+                }
                 doGet(request, response);
             } else {
                 Product c = new Product(id_raw, name, price, describe, image);

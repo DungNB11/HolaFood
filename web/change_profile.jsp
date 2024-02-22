@@ -64,7 +64,7 @@
                     <c:set var="a" value="${sessionScope.account}"/>
                     <h2 class="col-12 text-center tm-section-title">User ${a.fullname}</h2>
                     <h3 style="color: red">${requestScope.ms}</h3>
-                    <a href="profile.jsp" target="_parent" class="tm-register">
+                    <a href="profile" target="_parent" class="tm-register">
                         <i> <-Back </i>
                     </a>
                     <h2 class="col-12 text-center tm-section-title"></h2>

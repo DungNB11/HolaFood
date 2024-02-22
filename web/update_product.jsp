@@ -55,7 +55,7 @@
             <main>
                 
                 <div class="col-md-4" style="margin-left: 50px">
-                    <a href="alist" target="_parent" class="tm-register">
+                    <a href="manager" target="_parent" class="tm-register">
                         <i> <-Back </i>
                     </a>
                 </div>
@@ -66,19 +66,22 @@
                             <c:set var="p" value="${requestScope.prod}"/>
                             <div class="col-md-6">
                                 <form action="update_product" method="post">
-                                    <h5 style="color: red; margin: auto; padding-bottom: 2rem">${requestScope.error}</h5>
                                     <div class="form-group">
                                         <input type="text" readonly name="id" value="${p.id}" class="form-control" required="" />
                                     </div>
+                                    <h5 style="color: red;text-align: left; margin-left: 1rem">${requestScope.errorName}</h5>
                                     <div class="form-group">
                                         <input type="text" name="name" value="${p.name}" class="form-control" placeholder="Update name" required="" />
                                     </div>
+                                    <h5 style="color: red;text-align: left; margin-left: 1rem">${requestScope.errorPrice}</h5>
                                     <div class="form-group">
                                         <input type="number" name="price" value="${p.price}" class="form-control" placeholder="Update price" required="" />
                                     </div>
+                                    <h5 style="color: red;text-align: left; margin-left: 1rem">${requestScope.errorDescribe}</h5>
                                     <div class="form-group">
                                         <input type="text" name="describe" value="${p.describe}" class="form-control" placeholder="Update describe" required="" />
                                     </div>
+                                    <h5 style="color: red;text-align: left; margin-left: 1rem">${requestScope.errorImage}</h5>
                                     <div class="form-group">
                                         <input type="text" name="image" value="${p.image}" class="form-control" placeholder="Update image" required="" />
                                     </div>

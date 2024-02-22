@@ -55,7 +55,7 @@
             <main>
                 
                 <div class="col-md-4" style="margin-left: 50px">
-                    <a href="alist" target="_parent" class="tm-register">
+                    <a href="manager" target="_parent" class="tm-register">
                         <i> <-Back </i>
                     </a>
                 </div>

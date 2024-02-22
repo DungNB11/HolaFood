@@ -77,16 +77,19 @@
 
                                 
                                 <form action="add_product" method="POST" >
-                                    <h5 style="color: red; margin: auto; padding-bottom: 2rem">${requestScope.error}</h5>
+                                    <h5 style="color: red; text-align: left; margin-left: 1rem">${requestScope.errorName}</h5>
                                     <div class="form-group">
                                         <input type="text" name="name"  class="form-control" placeholder="Product name" required="" />
                                     </div>
+                                    <h5 style="color: red; text-align: left; margin-left: 1rem">${requestScope.errorPrice}</h5>
                                     <div class="form-group">
                                         <input type="number" name="price"  class="form-control" placeholder="Product price" required="" />
                                     </div>
+                                    <h5 style="color: red; text-align: left; margin-left: 1rem">${requestScope.errorDescribe}</h5>
                                     <div class="form-group">
                                         <input type="text" name="describe"  class="form-control" placeholder="Product describe" required="" />
                                     </div>
+                                    <h5 style="color: red; text-align: left; margin-left: 1rem">${requestScope.errorImage}</h5>
                                     <div class="form-group">
                                         <input  type="text" name="image"  class="form-control" placeholder="Product image" required="" />
                                     </div>
