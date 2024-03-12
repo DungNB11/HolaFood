@@ -76,7 +76,7 @@ public class ChangeProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        InOutUtils in = new InOutUtils();
+       InOutUtils in = new InOutUtils();
 
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
@@ -84,31 +84,37 @@ public class ChangeProfileServlet extends HttpServlet {
         String email = request.getParameter("email");
         String phonenum = request.getParameter("phonenum");
         String address = request.getParameter("address");
-        if(fullname.trim().length()==0||email.trim().length()==0
-                || phonenum.trim().length()==0 || address.trim().length()==0){
-            logger.log(Level.WARNING, "One of the field has null value");
-        }
+
         User u = UserDAO.INSTANCE.check(user, pass);
         if (u != null) {
-            if (!in.isValidFullName(fullname)) {
+            if (!in.isValidFullName(fullname) || fullname.trim().length() == 0) {
                 logger.log(Level.WARNING, "Full Name does not valid");
             }
-            if (!in.isValidPhoneNumber(phonenum)) {
+            if (!in.isValidPhoneNumber(phonenum)|| phonenum.trim().length() == 0) {
                 logger.log(Level.WARNING, "Phone number does not valid");
             }
-            if (!in.isValidEmail(email)) {
+            if (!in.isValidEmail(email)|| email.trim().length() == 0) {
                 logger.log(Level.WARNING, "Email does not valid");
             }
-            if (!in.isValidAddress(address)) {
+            if (!in.isValidAddress(address)|| address.trim().length() == 0) {
                 logger.log(Level.WARNING, "Address does not valid");
-            } else {
+            }
+
+            if (in.isValidFullName(fullname) == true
+                    && fullname.trim().length() != 0
+                    && email.trim().length() != 0
+                    && phonenum.trim().length() != 0
+                    && address.trim().length() != 0
+                    && in.isValidPhoneNumber(phonenum) == true
+                    && in.isValidEmail(email) == true
+                    && in.isValidAddress(address) == true) {
                 User ac = new User(user, pass, fullname, email, phonenum, address);
                 UserDAO.INSTANCE.changePro(ac);
-                
+
                 HttpSession session = request.getSession();
                 session.setAttribute("account", ac);
-                logger.log(Level.INFO, "Update Successfully");
-                
+                logger.log(Level.INFO, "Update Profile Successfully");
+
             }
 
         }

@@ -80,7 +80,7 @@
                                     <input type="password" name="pass" title="Password must be at least 8 characters long and cannot contain spaces." class="form-control" placeholder="Password" required="" />
                                 </div>
 
-                                <input type="checkbox" name="remember me" ${(cookie.crem.value!=null?'checked':'')} value="on"/> Remember me <br/>
+                                <!--<input type="checkbox" name="remember me" ${(cookie.crem.value!=null?'checked':'')} value="on"/> Remember me <br/>-->
                                 <h3></h3>
                                 <div class="form-group tm-d-flex">
 
